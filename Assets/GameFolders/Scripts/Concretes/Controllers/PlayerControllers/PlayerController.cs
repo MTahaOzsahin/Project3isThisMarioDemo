@@ -1,61 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
+using UdemyProjectTutorial3.Abstracts.Inputs;
+using UdemyProjectTutorial3.Concretes.Animations;
+using UdemyProjectTutorial3.Concretes.Inputs;
+using UdemyProjectTutorial3.Concretes.Movement;
 using UnityEngine;
 
 namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
 {
     public class PlayerController : MonoBehaviour
     {
-        Animator playerAnimator;
-        Rigidbody2D playerRigibody2D;
+
+        CharacterAnimations characterAnimations;
+        Mover mover;
+        Jump jump;
+        OnGround onGround;
+        IPlayerInput input;
 
 
         float horizontal;
-        bool isJump;
 
-        public bool IsJumpAction => playerRigibody2D.velocity != Vector2.zero; // sýfýrdan büyükse true döner.
+        
 
         private void Awake()
         {
-            playerAnimator = GetComponent<Animator>();
-            playerRigibody2D = GetComponent<Rigidbody2D>();
+            characterAnimations = GetComponent<CharacterAnimations>();
+            mover = GetComponent<Mover>();
+            jump = GetComponent<Jump>();
+            onGround = GetComponent<OnGround>();
+            input = new PCInput();
         }
 
         private void Update()
         {
             GetAxis();
-            JumpAction();
+            JumpControl();
         }
         private void FixedUpdate()
         {
-            Movement();
+            characterAnimations.MoveAnim(horizontal);
+            mover.Movement(horizontal);
         }
         void GetAxis()
         {
-             horizontal = Input.GetAxis("Horizontal");
+            horizontal = input.Horizontal;
         }
-        void Movement()
+        void JumpControl()
         {
-            
-            playerAnimator.SetFloat("movementSpeed",Mathf.Abs(horizontal));
-            transform.Translate(Vector2.right * horizontal * Time.deltaTime * 12f);
-            if (horizontal != 0)
+            if (onGround.IsGround && Input.GetButtonDown("Jump"))
             {
-                transform.localScale = new Vector2(Mathf.Sign(horizontal), 1f);
+                jump.JumpAction();
             }
+            characterAnimations.JumpAnim(jump.IsJumpAction);
         }
-        void JumpAction()
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                isJump = true;
-            }
-            if (isJump)
-            {
-                playerRigibody2D.AddForce(Vector2.up * 350f);
-                isJump = false;
-            }
-            playerAnimator.SetBool("isJump", IsJumpAction);
-        }
+        
+        
     }
 }
