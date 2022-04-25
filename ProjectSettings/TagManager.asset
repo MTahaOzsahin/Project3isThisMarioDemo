@@ -41,6 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 3084127481
+    locked: 0
+  - name: MiddleGround
+    uniqueID: 778791577
+    locked: 0
   - name: ForeGround
     uniqueID: 708435519
+    locked: 0
+  - name: Player
+    uniqueID: 3143314849
+    locked: 0
+  - name: DeadZone
+    uniqueID: 2468671197
     locked: 0

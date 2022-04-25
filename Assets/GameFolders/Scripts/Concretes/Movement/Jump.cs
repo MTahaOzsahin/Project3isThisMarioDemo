@@ -18,8 +18,17 @@ namespace UdemyProjectTutorial3.Concretes.Movement
 
         public void JumpAction()
         {      
-            playerRigibody2D.velocity = Vector2.zero;
-            playerRigibody2D.AddForce(Vector2.up * 350f);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                playerRigibody2D.velocity = Vector2.zero;
+                playerRigibody2D.AddForce(Vector2.up * 500f);
+            }
+            else
+            {
+                playerRigibody2D.velocity = Vector2.zero;
+                playerRigibody2D.AddForce(Vector2.up * 350f);
+
+            }
         }
     }
 }
