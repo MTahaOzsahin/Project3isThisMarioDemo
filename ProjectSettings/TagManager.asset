@@ -56,3 +56,6 @@ TagManager:
   - name: DeadZone
     uniqueID: 2468671197
     locked: 0
+  - name: Ladder
+    uniqueID: 1337004951
+    locked: 0
