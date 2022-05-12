@@ -25,8 +25,8 @@ namespace UdemyProjectTutorial3.Concretes.Movement
 
         private void CheckFootOnGround(Transform footTransform)
         {
-            RaycastHit2D hit = Physics2D.Raycast(footTransform.position, footTransform.forward, 0.15f, layerMask);
-            Debug.DrawRay(footTransform.position, footTransform.forward * 0.15f, Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(footTransform.position, footTransform.forward, 0.50f, layerMask);
+            Debug.DrawRay(footTransform.position, footTransform.forward * 0.50f, Color.red);
 
             if (hit.collider != null)
             {

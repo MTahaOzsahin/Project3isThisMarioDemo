@@ -15,10 +15,12 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         Mover mover;
         Jump jump;
         OnGround onGround;
+        Climbing climbing;
         IPlayerInput input;
 
 
         float horizontal;
+        float vertical;
 
         
 
@@ -28,6 +30,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
             mover = GetComponent<Mover>();
             jump = GetComponent<Jump>();
             onGround = GetComponent<OnGround>();
+            climbing = GetComponent<Climbing>();
             input = new PCInput();
         }
 
@@ -39,21 +42,38 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         private void FixedUpdate()
         {
             characterAnimations.MoveAnim(horizontal);
+            characterAnimations.ClimbAnim(climbing.IsCharacterClimbing);
             mover.Movement(horizontal);
+            ClimbControl();
         }
         void GetAxis()
         {
             horizontal = input.Horizontal;
+            vertical = input.Vertical;
         }
         void JumpControl()
         {
-            if (onGround.IsGround && Input.GetButtonDown("Jump"))
+            bool IsJumpAction = false;
+            if (onGround.IsGround && Input.GetButtonDown("Jump") && !climbing.IsCharacterClimbing)
             {
+                IsJumpAction = true;
                 jump.JumpAction();
             }
-            characterAnimations.JumpAnim(jump.IsJumpAction);
+            else if (!onGround.IsGround)
+            {
+                IsJumpAction = true;
+            }
+            else if (onGround.IsGround)
+            {
+                IsJumpAction = false;
+            }
+           
+            characterAnimations.JumpAnim(IsJumpAction);
         }
-        
+        void ClimbControl()
+        {
+            climbing.ClimbAction(vertical);
+        }
         
     }
 }

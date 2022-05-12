@@ -9,7 +9,7 @@ namespace UdemyProjectTutorial3.Concretes.Movement
     {
         Rigidbody2D playerRigibody2D;
 
-        public bool IsJumpAction => playerRigibody2D.velocity != Vector2.zero; // sýfýrdan büyükse true döner. 
+        //public bool IsJumpAction => playerRigibody2D.velocity != Vector2.zero; // sýfýrdan büyükse true döner. 
 
         private void Awake()
         {

@@ -8,6 +8,9 @@ namespace UdemyProjectTutorial3.Concretes.Inputs
     public class PCInput : IPlayerInput
     {
         public float Horizontal => Input.GetAxis("Horizontal");
+        public float Vertical => Input.GetAxis("Vertical");
         public bool IsJumpButtonDown => Input.GetButtonDown("Jump");
+
+        
     }
 }

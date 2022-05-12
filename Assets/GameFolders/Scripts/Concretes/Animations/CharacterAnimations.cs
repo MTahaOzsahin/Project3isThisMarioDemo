@@ -21,12 +21,18 @@ namespace UdemyProjectTutorial3.Concretes.Animations
         }
         public void JumpAnim(bool notOnGround)
         {
-            //if (isJump == playerAnimator.GetBool("isJump") == isJump) return;
+            
 
 
             playerAnimator.SetBool("isJump", notOnGround);
         }
         
+        public void ClimbAnim (bool isClimbing)
+        {
+            if (playerAnimator.GetBool("isClimb") == isClimbing) return;
+
+            playerAnimator.SetBool("isClimb", isClimbing);
+        }
     }
 }
 
