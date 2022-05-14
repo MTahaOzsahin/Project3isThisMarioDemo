@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UdemyProjectTutorial3.Abstracts.Inputs;
 using UdemyProjectTutorial3.Concretes.Animations;
+using UdemyProjectTutorial3.Concretes.Combats;
 using UdemyProjectTutorial3.Concretes.Inputs;
 using UdemyProjectTutorial3.Concretes.Movement;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         Jump jump;
         OnGround onGround;
         Climbing climbing;
+        Health health;
         IPlayerInput input;
 
 
@@ -31,6 +33,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
             jump = GetComponent<Jump>();
             onGround = GetComponent<OnGround>();
             climbing = GetComponent<Climbing>();
+            health = GetComponent<Health>();
             input = new PCInput();
         }
 
@@ -74,6 +77,17 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         {
             climbing.ClimbAction(vertical);
         }
-        
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            Damage damage = collision.collider.GetComponent<Damage>();
+            if (damage != null)
+            {
+                health.TakeHit(damage);
+                //damage.HitTerget(health);  Bu da çalýþýr.
+            }
+            return;
+        }
+
     }
 }
