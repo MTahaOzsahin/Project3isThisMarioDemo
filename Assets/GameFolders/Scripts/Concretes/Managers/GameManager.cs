@@ -36,7 +36,32 @@ namespace UdemyProjectTutorial3.Concretes.Managers
         IEnumerator LoadSceneAsync(int LevelIndex)
         {
             yield return new WaitForSeconds(delayLevelTime);
-            yield return SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + LevelIndex);
+
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+
+            yield return SceneManager.UnloadSceneAsync(buildIndex);
+
+            SceneManager.LoadSceneAsync(buildIndex + LevelIndex, LoadSceneMode.Additive).completed += (AsyncOperation obj) =>
+            {
+                SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(buildIndex + LevelIndex));
+            };
+        }
+
+        public void LoadMenuAndUi(float delayLoadingTime)
+        {
+            StartCoroutine(LoadMenuAndUiAsync(delayLoadingTime));
+        }
+
+        IEnumerator LoadMenuAndUiAsync(float delayLoadingTime)
+        {
+            yield return new WaitForSeconds(delayLoadingTime);
+            yield return SceneManager.LoadSceneAsync("Menu");
+            yield return SceneManager.LoadSceneAsync("Ui", LoadSceneMode.Additive);
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
         }
     }
 }
