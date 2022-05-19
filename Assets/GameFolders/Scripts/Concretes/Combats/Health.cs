@@ -11,6 +11,7 @@ namespace UdemyProjectTutorial3.Concretes.Combats
 
         public bool IsDead => currentHealth < 1;
         public event System.Action OnHealthChanged;
+        public event System.Action OnDead;
 
         private void Awake()
         {
@@ -21,7 +22,16 @@ namespace UdemyProjectTutorial3.Concretes.Combats
         {
             if (IsDead) return;
             currentHealth -= damage.HitDamage;
-            OnHealthChanged?.Invoke();
+
+            if (IsDead)
+            {
+                OnDead?.Invoke();
+            }
+            else
+            {
+                OnHealthChanged?.Invoke();
+            }
+            
         }
     }
 }

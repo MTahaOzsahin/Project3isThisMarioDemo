@@ -5,6 +5,7 @@ using UdemyProjectTutorial3.Concretes.Animations;
 using UdemyProjectTutorial3.Concretes.Combats;
 using UdemyProjectTutorial3.Concretes.Inputs;
 using UdemyProjectTutorial3.Concretes.Movement;
+using UdemyProjectTutorial3.Concretes.Uis;
 using UnityEngine;
 
 namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
@@ -36,7 +37,15 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
             health = GetComponent<Health>();
             input = new PCInput();
         }
+        private void Start()
+        {
+            GameCanvas gameCanvas = FindObjectOfType<GameCanvas>();
 
+            if (gameCanvas != null)
+            {
+                health.OnDead += gameCanvas.ShowGameOverPanel;
+            }
+        }
         private void Update()
         {
             GetAxis();
@@ -51,6 +60,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         }
         void GetAxis()
         {
+            if (health.IsDead) return;
             horizontal = input.Horizontal;
             vertical = input.Vertical;
         }

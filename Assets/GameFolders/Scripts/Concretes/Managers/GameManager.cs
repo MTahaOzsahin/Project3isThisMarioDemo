@@ -10,6 +10,8 @@ namespace UdemyProjectTutorial3.Concretes.Managers
         float delayLevelTime = 1f;
 
         public static GameManager Instance { get; private set; }
+
+        public event System.Action<bool> OnSceneChanged;
         private void Awake()
         {
             SingetonThisGameObject();
@@ -45,6 +47,8 @@ namespace UdemyProjectTutorial3.Concretes.Managers
             {
                 SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(buildIndex + LevelIndex));
             };
+
+            OnSceneChanged?.Invoke(false);
         }
 
         public void LoadMenuAndUi(float delayLoadingTime)
@@ -57,6 +61,8 @@ namespace UdemyProjectTutorial3.Concretes.Managers
             yield return new WaitForSeconds(delayLoadingTime);
             yield return SceneManager.LoadSceneAsync("Menu");
             yield return SceneManager.LoadSceneAsync("Ui", LoadSceneMode.Additive);
+
+            OnSceneChanged?.Invoke(true);
         }
 
         public void ExitGame()
