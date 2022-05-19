@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 7726758760893131087}
   - component: {fileID: 4865435557588169654}
   - component: {fileID: 4300839430886823623}
+  - component: {fileID: 6033267002956256779}
   m_Layer: 5
   m_Name: HealthText
   m_TagString: Untagged
@@ -480,6 +481,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6033267002956256779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201901327631738183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e47e2b5e42fb24b806257b33a800b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3561577537433138297
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +975,7 @@ GameObject:
   - component: {fileID: 5141209341192486417}
   - component: {fileID: 5657571543370429969}
   - component: {fileID: 8885947833284776244}
+  - component: {fileID: 3116421119845139861}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -1085,6 +1099,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3116421119845139861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666992544960694041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054be28a026e9c84f974b6415528aa0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7692532759812135592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,3 +1444,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePlayObject: {fileID: 265239214436169845}
+  gameOverPanel: {fileID: 0}

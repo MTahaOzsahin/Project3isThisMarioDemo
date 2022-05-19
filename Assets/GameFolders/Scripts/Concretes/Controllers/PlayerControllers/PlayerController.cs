@@ -37,13 +37,15 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
             health = GetComponent<Health>();
             input = new PCInput();
         }
-        private void Start()
+        private void OnEnable()
         {
             GameCanvas gameCanvas = FindObjectOfType<GameCanvas>();
 
             if (gameCanvas != null)
             {
                 health.OnDead += gameCanvas.ShowGameOverPanel;
+                DisplayHealth displayHealth = gameCanvas.GetComponentInChildren<DisplayHealth>();
+                health.OnHealthChanged += displayHealth.WriteHealth;
             }
         }
         private void Update()

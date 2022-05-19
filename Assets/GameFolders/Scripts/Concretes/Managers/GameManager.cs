@@ -8,9 +8,11 @@ namespace UdemyProjectTutorial3.Concretes.Managers
     public class GameManager : MonoBehaviour
     {
         float delayLevelTime = 1f;
+        [SerializeField] int score;
 
         public static GameManager Instance { get; private set; }
 
+        public event System.Action<int> OnScoreChanged;
         public event System.Action<bool> OnSceneChanged;
         private void Awake()
         {
@@ -61,10 +63,16 @@ namespace UdemyProjectTutorial3.Concretes.Managers
             yield return new WaitForSeconds(delayLoadingTime);
             yield return SceneManager.LoadSceneAsync("Menu");
             yield return SceneManager.LoadSceneAsync("Ui", LoadSceneMode.Additive);
+            
 
             OnSceneChanged?.Invoke(true);
         }
 
+        public void IncreaseScore(int score = 0)
+        {
+            this.score += score;
+            OnScoreChanged?.Invoke(this.score);
+        }
         public void ExitGame()
         {
             Application.Quit();
