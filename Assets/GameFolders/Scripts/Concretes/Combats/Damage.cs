@@ -10,7 +10,7 @@ namespace UdemyProjectTutorial3.Concretes.Combats
 
         public int HitDamage => damage;
 
-        public void HitTerget (Health health)
+        public void HitTarget (Health health)
         {
             health.TakeHit(this);
         }

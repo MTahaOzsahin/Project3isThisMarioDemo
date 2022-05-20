@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UdemyProjectTutorial3.Abstracts.Inputs;
 using UdemyProjectTutorial3.Concretes.Animations;
 using UdemyProjectTutorial3.Concretes.Combats;
+using UdemyProjectTutorial3.Concretes.Controllers.EnemiesController;
 using UdemyProjectTutorial3.Concretes.Inputs;
 using UdemyProjectTutorial3.Concretes.Movement;
 using UdemyProjectTutorial3.Concretes.Uis;
@@ -93,12 +94,19 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         private void OnCollisionEnter2D(Collision2D collision)
         {
             Damage damage = collision.collider.GetComponent<Damage>();
-            if (damage != null)
+            if (damage != null && collision.collider.GetComponent<EnemyController>() != null &&
+                collision.contacts[0].normal.x > 0.6f || 
+                collision.contacts[0].normal.x < -0.6f)
             {
-                health.TakeHit(damage);
-                //damage.HitTerget(health);  Bu da çalýþýr.
+                //health.TakeHit(damage); Bu da çalýþýr.
+                damage.HitTarget(health);
+                return;
             }
-            return;
+            if (damage != null && collision.collider.GetComponent<EnemyController>() == null )
+            {
+                damage.HitTarget(health);
+            }
+            
         }
 
     }
