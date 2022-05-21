@@ -21,9 +21,6 @@ namespace UdemyProjectTutorial3.Concretes.Animations
         }
         public void JumpAnim(bool notOnGround)
         {
-            
-
-
             playerAnimator.SetBool("isJump", notOnGround);
         }
         
@@ -32,6 +29,10 @@ namespace UdemyProjectTutorial3.Concretes.Animations
             if (playerAnimator.GetBool("isClimb") == isClimbing) return;
 
             playerAnimator.SetBool("isClimb", isClimbing);
+        }
+        public void DeathAnim()
+        {
+            playerAnimator.SetTrigger("Death");
         }
     }
 }

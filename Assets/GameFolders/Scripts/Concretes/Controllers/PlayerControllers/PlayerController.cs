@@ -4,6 +4,7 @@ using UdemyProjectTutorial3.Abstracts.Inputs;
 using UdemyProjectTutorial3.Concretes.Animations;
 using UdemyProjectTutorial3.Concretes.Combats;
 using UdemyProjectTutorial3.Concretes.Controllers.EnemiesController;
+using UdemyProjectTutorial3.Concretes.ExtensionMethods;
 using UdemyProjectTutorial3.Concretes.Inputs;
 using UdemyProjectTutorial3.Concretes.Movement;
 using UdemyProjectTutorial3.Concretes.Uis;
@@ -20,6 +21,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         OnGround onGround;
         Climbing climbing;
         Health health;
+        Damage damage;
         IPlayerInput input;
 
 
@@ -36,6 +38,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
             onGround = GetComponent<OnGround>();
             climbing = GetComponent<Climbing>();
             health = GetComponent<Health>();
+            damage = GetComponent<Damage>();
             input = new PCInput();
         }
         private void OnEnable()
@@ -93,20 +96,26 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Damage damage = collision.collider.GetComponent<Damage>();
-            if (damage != null && collision.collider.GetComponent<EnemyController>() != null &&
-                collision.contacts[0].normal.x > 0.6f || 
-                collision.contacts[0].normal.x < -0.6f)
+            Health health = collision.ObjectHasHealth();
+
+            if (health != null && collision.WasHitTopSide())
             {
-                //health.TakeHit(damage); Bu da çalýþýr.
-                damage.HitTarget(health);
-                return;
+                health.TakeHit(damage);
+                jump.JumpAction();
             }
-            if (damage != null && collision.collider.GetComponent<EnemyController>() == null )
-            {
-                damage.HitTarget(health);
-            }
-            
+
+            //Damage damage = collision.collider.GetComponent<Damage>();
+            //if (collision.HasHitEnemy() && collision.WasHitRightOrLeftSide())
+            //{
+            //    //health.TakeHit(damage); Bu da çalýþýr.
+            //    damage.HitTarget(health);
+            //    return;
+            //}
+            //if (damage != null && !collision.HasHitEnemy())
+            //{
+            //    damage.HitTarget(health);
+            //}
+
         }
 
     }

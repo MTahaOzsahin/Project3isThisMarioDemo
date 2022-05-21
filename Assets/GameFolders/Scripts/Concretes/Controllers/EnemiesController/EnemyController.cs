@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UdemyProjectTutorial3.Concretes.Animations;
 using UdemyProjectTutorial3.Concretes.Combats;
 using UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers;
+using UdemyProjectTutorial3.Concretes.ExtensionMethods;
 using UdemyProjectTutorial3.Concretes.Movement;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.EnemiesController
         CharacterAnimations characterAnimations;
         Mover mover;
         Health health;
+        Damage damage;
         OnReachedEdge onReachedEdge;
 
         bool isOnEdge;
@@ -22,6 +24,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.EnemiesController
             characterAnimations = GetComponent<CharacterAnimations>();
             mover = GetComponent<Mover>();
             health = GetComponent<Health>();
+            damage = GetComponent<Damage>();
             onReachedEdge = GetComponent<OnReachedEdge>();
             direction = 1f;
         }
@@ -37,6 +40,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.EnemiesController
 
             
             mover.Movement(direction);
+            characterAnimations.MoveAnim(direction);
             
         }
         private void LateUpdate()
@@ -50,18 +54,22 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.EnemiesController
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Damage damage = collision.collider.GetComponent<Damage>();
+            Health health = collision.ObjectHasHealth();
 
-            if (collision.collider.GetComponent<PlayerController>() != null &&
-                collision.contacts[0].normal.y < -0.6f)
+            if (health != null && collision.WasHitRightOrLeftSide())
             {
-                damage.HitTarget(health);
+                health.TakeHit(damage);
             }
         }
-
+        IEnumerator DeadActionAsync()
+        {
+            characterAnimations.DeathAnim();
+            yield return new WaitForSeconds(0.5f);
+            Destroy(this.gameObject);
+        }
         void DeadAction()
         {
-            Destroy(this.gameObject);
+            StartCoroutine(DeadActionAsync());
         }
     }
 }
