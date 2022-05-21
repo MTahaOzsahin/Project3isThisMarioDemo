@@ -9,6 +9,9 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.ScoreContoller
     public class ScoreController : MonoBehaviour
     {
         [SerializeField] int score = 1;
+        [SerializeField] AudioClip scoreClip;
+
+        public static event System.Action<AudioClip> OnScoreSoundClip;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -17,6 +20,8 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.ScoreContoller
             if (player != null)
             {
                 GameManager.Instance.IncreaseScore(score);
+
+                OnScoreSoundClip.Invoke(scoreClip);
 
                 Destroy(this.gameObject);
             }

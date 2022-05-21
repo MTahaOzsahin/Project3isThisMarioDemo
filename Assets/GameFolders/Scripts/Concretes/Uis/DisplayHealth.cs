@@ -14,7 +14,7 @@ namespace UdemyProjectTutorial3.Concretes.Uis
             healthText = GetComponent<TextMeshProUGUI>();
         }
 
-        public void WriteHealth(int currentHealth)
+        public void WriteHealth(int currentHealth, int maxHealth)
         {
             healthText.text = currentHealth.ToString();
         } 

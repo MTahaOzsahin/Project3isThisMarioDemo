@@ -11,6 +11,8 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.EnemiesController
 {
     public class EnemyController : MonoBehaviour
     {
+        [SerializeField] AudioClip deadClip;
+
         CharacterAnimations characterAnimations;
         Mover mover;
         Health health;
@@ -19,6 +21,9 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.EnemiesController
 
         bool isOnEdge;
         float direction;
+
+        public static event System.Action<AudioClip> OnEnemyDead;
+
         private void Awake()
         {
             characterAnimations = GetComponent<CharacterAnimations>();
@@ -31,6 +36,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.EnemiesController
         private void OnEnable()
         {
             health.OnDead += DeadAction;
+            health.OnDead += () => OnEnemyDead.Invoke(deadClip);
         }
        
 

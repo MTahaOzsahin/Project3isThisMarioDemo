@@ -14,6 +14,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] AudioClip deadClip;
 
         CharacterAnimations characterAnimations;
         Mover mover;
@@ -22,13 +23,14 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
         Climbing climbing;
         Health health;
         Damage damage;
+        AudioSource audioSource;
         IPlayerInput input;
 
 
         float horizontal;
         float vertical;
 
-        
+        public static event System.Action<AudioClip> OnPLayerDead;
 
         private void Awake()
         {
@@ -39,6 +41,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
             climbing = GetComponent<Climbing>();
             health = GetComponent<Health>();
             damage = GetComponent<Damage>();
+            audioSource = GetComponent<AudioSource>();
             input = new PCInput();
         }
         private void OnEnable()
@@ -51,6 +54,10 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
                 DisplayHealth displayHealth = gameCanvas.GetComponentInChildren<DisplayHealth>();
                 health.OnHealthChanged += displayHealth.WriteHealth;
             }
+
+            health.OnDead += () => OnPLayerDead(deadClip);
+
+            health.OnHealthChanged += PlaySoundOnHit;
         }
         private void Update()
         {
@@ -118,5 +125,10 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.PlayerControllers
 
         }
 
+        void PlaySoundOnHit(int currentHealth, int maxHealth)
+        {
+            if (currentHealth == maxHealth) return;
+            audioSource.Play();
+        }
     }
 }

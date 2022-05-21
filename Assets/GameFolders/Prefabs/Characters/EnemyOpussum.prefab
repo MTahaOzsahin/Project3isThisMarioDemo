@@ -113,6 +113,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.19282556
       objectReference: {fileID: 0}
+    - target: {fileID: 4969235102455685950, guid: b934ee2f65b179d429f50f391e206e9e, type: 3}
+      propertyPath: deadClip
+      value: 
+      objectReference: {fileID: 8300000, guid: df859d3483731d74ba622e2f837a73f4, type: 3}
     - target: {fileID: 6164855398947083796, guid: b934ee2f65b179d429f50f391e206e9e, type: 3}
       propertyPath: m_Name
       value: EnemyOpussum

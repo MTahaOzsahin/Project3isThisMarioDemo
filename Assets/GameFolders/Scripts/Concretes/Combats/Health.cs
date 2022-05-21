@@ -7,9 +7,9 @@ namespace UdemyProjectTutorial3.Concretes.Combats
     public class Health : MonoBehaviour
     {
         [SerializeField] int maxHealth = 5;
-        [SerializeField] int currentHealth = 0; 
+        [SerializeField] int currentHealth = 0;
         public bool IsDead => currentHealth < 1;
-        public event System.Action<int> OnHealthChanged;
+        public event System.Action<int,int> OnHealthChanged;
         public event System.Action OnDead;
 
         private void Awake()
@@ -18,7 +18,7 @@ namespace UdemyProjectTutorial3.Concretes.Combats
         }
         private void Start()
         {
-            OnHealthChanged?.Invoke(maxHealth);
+            OnHealthChanged?.Invoke(currentHealth,maxHealth);
         }
         public void TakeHit(Damage damage)
         {
@@ -31,7 +31,7 @@ namespace UdemyProjectTutorial3.Concretes.Combats
             }
             else
             {
-                OnHealthChanged?.Invoke(currentHealth);
+                OnHealthChanged?.Invoke(currentHealth,maxHealth);
             }
             
         }

@@ -25,7 +25,7 @@ namespace UdemyProjectTutorial3.Concretes.Managers
             health.OnHealthChanged += HandleHealthChanged;
         }
 
-        private void HandleHealthChanged(int currentHealth)
+        private void HandleHealthChanged(int currentHealth, int maxHealth)
         {
                                                                 //Buradaki x noktalarý temsil ediyor.
             health.transform.position = checkpointsControllers.LastOrDefault(x => x.IsPassed).transform.position; //Varsa son  geçtiði deðeri dönüyor Lastor
