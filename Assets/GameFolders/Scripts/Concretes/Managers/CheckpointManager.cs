@@ -20,6 +20,7 @@ namespace UdemyProjectTutorial3.Concretes.Managers
             health = FindObjectOfType<PlayerController>().GetComponent<Health>(); // Böylelikle sadece playerin taþýdýðý health componentini almýþ olduk.
         }
 
+
         private void Start()
         {
             health.OnHealthChanged += HandleHealthChanged;

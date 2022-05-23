@@ -13,7 +13,7 @@ namespace UdemyProjectTutorial3.Concretes.Controllers.LevelController
             PlayerController player = collision.GetComponent<PlayerController>();
             if (player != null)
             {
-                GameManager.Instance.LoadScene();
+                GameManager.Instance.LoadScene(1);
             }
         }
     }

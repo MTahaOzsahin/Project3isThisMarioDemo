@@ -8917,10 +8917,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 519222252}
     m_Modifications:
-    - target: {fileID: 3368773704657592689, guid: 871f7c2ae06e2c441ace235576183540, type: 3}
-      propertyPath: deadClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 82fadfc205d097545a7a531812e13aca, type: 3}
     - target: {fileID: 3368773704657592690, guid: 871f7c2ae06e2c441ace235576183540, type: 3}
       propertyPath: m_Name
       value: Player
