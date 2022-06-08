@@ -6,7 +6,7 @@ This Unity project has been created to improve myself. The project is a mario li
 
 ![Ekran görüntüsü 2022-06-08 105508](https://user-images.githubusercontent.com/87945619/172563020-efd564b2-75a5-414e-9cb4-52c81a000de3.png)
 
-What is focused in project:
+# What is focused in project:
 
 *Tilemaps and palettes.
 
@@ -15,6 +15,8 @@ What is focused in project:
 *IHealth and IDamage.
 
 *Extension methods.
+
+*Singelton method.
 
 *Observer Pattern.
 
